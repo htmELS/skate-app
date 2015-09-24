@@ -1,0 +1,3 @@
+[submodule "meteor-rest-sync"]
+	path = packages/hermanbanken:rest-sync
+	url = git@github.com:hermanbanken/meteor-rest-sync.git

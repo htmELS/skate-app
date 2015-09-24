@@ -1,0 +1,33 @@
+<template name="CompetitionsSubscribe">
+
+  {{#contentFor "headerButtonLeft"}}
+    {{>ionNavBackButton class="button-positive"}}
+  {{/contentFor}}
+
+  {{#contentFor "headerButtonRight"}}
+    <button class="button button-clear" data-ion-popover="_filterCompetitions"> Subscribe
+      {{#if isAndroid}}
+        {{> ionIcon icon='android-more-vertical'}}
+      {{else}}
+        {{> ionIcon icon='more'}}
+      {{/if}}
+    </button>
+  {{/contentFor}}
+
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">Competition {{name}}</h1>
+  {{/contentFor}}
+
+  {{#ionView}}
+    {{#ionContent}}
+
+      {{#ionList}}
+        {{#ionItem iconRight=false}}<h2>{{name}}</h2>{{/ionItem}}
+        {{#ionItem iconRight=false}}
+          <a class="button button-positive" href="{{subscribeUrl}}">Open inschrijvingsformulier</a>
+        {{/ionItem}}
+      {{/ionList}}
+
+    {{/ionContent}}
+  {{/ionView}}
+</template>

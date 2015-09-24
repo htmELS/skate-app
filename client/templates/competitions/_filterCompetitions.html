@@ -1,0 +1,16 @@
+<template name="_filterCompetitions">
+  {{#ionPopover}}
+    <div class="content">
+      <div class="list">
+        <a href="{{pathFor 'competitions.filter.venue'}}" class="item item-icon-right">
+          Schaatsbaan
+          {{> ionIcon icon="ios-arrow-right"}}
+        </a>
+        <a href="{{pathFor 'competitions.filter.category'}}" class="item item-icon-right">
+          Categorie
+          {{> ionIcon icon="ios-arrow-right"}}
+        </a>
+      </div>
+    </div>
+  {{/ionPopover}}
+</template>

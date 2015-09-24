@@ -1,0 +1,48 @@
+<template name="CompetitionsShow">
+
+  {{#contentFor "headerButtonLeft"}}
+    {{>ionNavBackButton class="button-positive"}}
+  {{/contentFor}}
+
+  {{#contentFor "headerButtonRight"}}
+    <button class="button button-clear" data-ion-popover="_filterCompetitions"> Subscribe
+      {{#if isAndroid}}
+        {{> ionIcon icon='android-more-vertical'}}
+      {{else}}
+        {{> ionIcon icon='more'}}
+      {{/if}}
+    </button>
+  {{/contentFor}}
+
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">Competition {{name}}</h1>
+  {{/contentFor}}
+
+  {{#ionView}}
+    {{#ionContent}}
+
+      {{#ionList}}
+        {{#ionItem iconRight=false}}<h2>{{name}}</h2>{{/ionItem}}
+        {{#ionItem iconRight=false}}<h2>Van {{date starts}} {{time starts}} tot {{onlytime ends starts}}</h2>{{/ionItem}}
+
+        {{#if extra}}
+          {{#ionItem iconRight=false}}<p>{{extra}}</p>{{/ionItem}}
+        {{/if}}
+
+        {{#ionItem iconRight=false class="bar-dark"}}
+          {{#if subscribeIsOpen}}
+            <h2 class="title">Inschrijven, inschrijving sluit op {{date settings.closes}} {{time settings.closes}}</h2>
+            <a class="button button-positive button-block" href="{{subscribeUrl}}">Open inschrijvingsformulier</a>
+          {{/if}}
+          {{#if subscribeWillOpen}}
+            <h2 class="title">Inschrijving is open van {{date settings.opens}} tot {{onlytime settings.closes settings.opens}}</h2>
+          {{/if}}
+          {{#if subscribeClosed}}
+            <h2 class="title">Inschrijving gesloten</h2>
+          {{/if}}
+        {{/ionItem}}
+      {{/ionList}}
+    {{/ionContent}}
+
+  {{/ionView}}
+</template>

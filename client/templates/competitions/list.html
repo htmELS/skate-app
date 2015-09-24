@@ -1,0 +1,42 @@
+<template name="CompetitionsList">
+  {{#contentFor "headerButtonRight"}}
+    <button class="button button-clear" data-ion-popover="_filterCompetitions">
+      {{#if isAndroid}}
+        {{> ionIcon icon='android-more-vertical'}}
+      {{else}}
+        {{> ionIcon icon='more'}}
+      {{/if}}
+    </button>
+  {{/contentFor}}
+
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">Competitions</h1>
+  {{/contentFor}}
+
+  {{#ionView}}
+    {{#ionContent}}
+
+      {{#ionList}}
+        {{#each competitions}}
+          {{> _competitionItem competition=this}}
+        {{/each}}
+      {{/ionList}}
+
+    {{/ionContent}}
+  {{/ionView}}
+</template>
+
+<template name="_competitionItem">
+  {{#with competition}}
+    {{#ionItem route="competitions.show" iconLeft=true iconRight=true}}
+      <h2>{{name}}</h2>
+      <p>
+        {{venue.address.city}}, {{datef starts}} - {{onlytime ends starts}} <span class="inline-icon">{{> ionIcon icon="ios-people" }}, {{subscribeText}}</span>
+      </p>
+<!--       <span class="people-count">
+      </span>
+ -->
+      {{> ionIcon icon="ios-arrow-right" }}
+    {{/ionItem}}
+  {{/with}}
+</template>

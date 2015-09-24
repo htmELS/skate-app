@@ -1,0 +1,32 @@
+<template name="competitionsFilterVenue">
+  {{#contentFor "headerButtonLeft"}}
+    {{>ionNavBackButton class="button-positive"}}
+  {{/contentFor}}
+
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">Venues</h1>
+  {{/contentFor}}
+
+  {{#ionView}}
+    {{#ionContent}}
+      {{#ionList}}
+        <a class="item venue item-icon-right" href="{{pathFor "competitions.list"}}" data-nav-direction="back">
+          <h2>Show All</h2>
+        </a>
+        {{#each venues}}
+          <a class="item venue item-icon-right" href="{{pathFor "competitions.list"}}" data-venue={{name}} data-nav-direction="back">
+            <h2>{{address.city}}, {{name}}</h2>
+            <p>{{address.street}}</p>
+          </a>
+        {{/each}}
+      {{/ionList}}
+
+    {{/ionContent}}
+  {{/ionView}}
+</template>
+
+<template name="competitionsFilterCategory">
+  {{#contentFor "headerButtonLeft"}}
+    {{>ionNavBackButton class="button-positive"}}
+  {{/contentFor}}
+</template>

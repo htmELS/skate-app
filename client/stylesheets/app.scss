@@ -1,0 +1,41 @@
+// Ionic
+@import '.meteor/local/build/programs/server/assets/packages/meteoric_ionic-sass/_ionic';
+@import '.meteor/local/build/programs/server/assets/packages/meteoric_ionicons-sass/_ionicons';
+
+* {
+  transition: all 1s;
+}
+
+.people-count {
+  font-size: 12px;
+  width: 36px;
+  text-align: right;
+  position: absolute;
+  top: 50%;
+  margin-top: -10px;
+  right: 16px;
+  color: #999999;
+
+  .icon {
+    font-size: 16px;
+    font-size: 16px;
+    position: static;
+    display: inline;
+    color: #cccccc;
+
+    &:before {
+      display: inline;
+    }
+  }
+}
+
+.inline-icon .icon {
+  position: static;
+  display: inline;
+  font-size: 20px;
+  vertical-align: middle;
+
+  &:before {
+    display: inline;
+  }
+}

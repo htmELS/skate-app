@@ -1,0 +1,57 @@
+<template name="Profile">
+
+  {{#contentFor "headerButtonRight"}}
+    <button class="button button-clear logout"> Afmelden</button>
+  {{/contentFor}}
+
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">Profiel</h1>
+  {{/contentFor}}
+
+  {{#ionView}}
+    {{#ionContent}}
+
+      <form id="edit-form" novalidate="novalidate">
+        <label type="stacked" class="item item-input item-stacked-label">
+          <span class="input-label">KNSB Relatie Id</span>
+          <input type="text" label-type="stacked" name="relationId" required="" id="relationId" data-schema-key="relationId" maxlength="200" value="{{relationId}}">
+        </label>
+        <label type="stacked" class="item item-input item-stacked-label">
+          <span class="input-label">Naam</span>
+          <input type="text" label-type="stacked" name="name" required="" id="name" data-schema-key="name" maxlength="200" value="{{profile.name}}">
+        </label>
+        <label type="stacked" class="item item-input item-stacked-label">
+          <span class="input-label">Categorie</span>
+          <input type="text" label-type="stacked" name="category" required="" id="category" data-schema-key="category" maxlength="200" value="{{profile.category}}">
+        </label>
+        <label type="stacked" class="item item-input item-stacked-label">
+          <span class="input-label">Geboortedatum</span>
+          <input type="text" label-type="stacked" name="personBirthDate" required="" id="personBirthDate" data-schema-key="personBirthDate" maxlength="200" value="{{profile.personBirthDate}}">
+        </label>
+        <label type="stacked" class="item item-input item-stacked-label">
+          <span class="input-label">Club</span>
+          <input type="text" label-type="stacked" name="club" required="" id="club" data-schema-key="club" maxlength="200" value="{{profile.club.fullName}}">
+        </label>
+<!--         <label type="stacked" class="item item-input item-stacked-label">
+          <span class="input-label">Body</span>
+          <textarea rows="10" label-type="stacked" name="body" required="" data-schema-key="body"></textarea>    
+        </label>
+        <div class="item item-toggle item-text-wrap">Published
+          <label class="toggle">
+            <input type="checkbox" value="true" name="published" data-schema-key="published">
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </div>      
+ -->
+        <div class="padding">
+          <button type="submit" class="button button-positive button-block">
+              Save          
+          </button>
+        </div>
+      </form>
+
+    {{/ionContent}}
+  {{/ionView}}
+</template>
