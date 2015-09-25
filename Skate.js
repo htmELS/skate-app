@@ -19,52 +19,11 @@ CompetitionsController = AppController.extend({});
 
 Router.route('/', function(){
   this.render('CompetitionsList', { data: () =>   {
-    var filter = Settings.get("competitions.filter.venue") ? { "venue.name": Settings.get("competitions.filter.venue") } : {};
-    
-    var fBegin = Session.get("competitions.filter.start") || { "ends": { "$gte": new Date() } };
-    var fEnd   = Session.get("competitions.filter.end") || { "starts": { "$lte": new Date(new Date().getTime() + 1000 * 3600 * 24 * 60) } };
-    var filters = [ filter, fBegin, fEnd ];
-
-    var competitions = Competitions.find(_.extend({}, filter, fBegin, fEnd), { sort: {starts: 1} }).fetch();
-
-    return {
-      // Data
-      competitions: competitions.reduce((memo, item) => {
-        var last = memo.length && memo[memo.length-1];
-        if(item.settings.closes < new Date() && !memo.past){
-          memo.push({ text: "Inschrijving gesloten" });
-          memo.past = true;
-        }
-        if(item.settings.closes > new Date() && item.settings.opens < new Date() && !memo.curr){
-          memo.push({ text: "Inschrijving nu open", "class": "dividerCurrent" });
-          memo.curr = true;
-        }
-        if(item.settings.opens > new Date() && !memo.future){
-          memo.push({ text: "Inschrijving binnenkort open" });
-          memo.future = true;
-        }
-        memo.push(item);
-        return memo;
-      }, []),
-      // Continuation forward
-      "more": function(){
-        var any = Competitions.find(_.extend({}, filter, fBegin), { sort: {starts: 1}, limit: 20 + competitions.length }).fetch().map(c => c.starts)
-        return {
-          extra: any.length - competitions.length,
-          conti: function(){
-            Session.set("competitions.filter.end", { "starts": { "$lte" : any[any.length-1] }});
-          }};
-      },
-      // Continuation backward
-      "less": function(){
-        var any = Competitions.find(_.extend({}, filter, fEnd), { sort: {starts: -1}, limit: 20 + competitions.length }).fetch().map(c => c.ends)
-        return {
-          extra: any.length - competitions.length, 
-          conti: function(){
-            Session.set("competitions.filter.start", { "ends": { "$gte" : any[any.length-1] }});
-          }};
-      }
-    }
+    return Competition.list(
+      Settings.get("competitions.filter.venue"),
+      Session.get("competitions.filter.start") || new Date(),
+      Session.get("competitions.filter.end") || new Date(new Date().getTime() + 1000 * 3600 * 24 * 60)
+    );
   }});
 }, { name: 'competitions.list', onBeforeAction: extractUrlSettings });
 

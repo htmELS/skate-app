@@ -17,7 +17,9 @@ Template.competitionsFilterVenue.helpers({
 
 Template.competitionsFilterVenue.events({
   "click .venue": function (event, template) {
-    Session.set("competitions.loadPast", false);
+    Session.set("competitions.filter.end", null);
+    Session.set("competitions.filter.start", null);
+
     if($(event.currentTarget).data('venue'))
       Settings.set("competitions.filter.venue", $(event.currentTarget).data('venue'));
     else

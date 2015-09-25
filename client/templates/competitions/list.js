@@ -11,13 +11,13 @@ Template.CompetitionsList.helpers({
 
 Template.CompetitionsList.events({
   "click .loadPast": function(){
+    Session.set("competitions.filter.start", this.start);
     IonLoading.show();
-    this.action.conti();
     setTimeout(IonLoading.hide, 500);
   },
   "click .loadFuture": function(){
+    Session.set("competitions.filter.end", this.end);
     IonLoading.show();
-    this.action.conti();
     setTimeout(IonLoading.hide, 500);
   }
 })

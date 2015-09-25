@@ -17,8 +17,8 @@
     {{#ionContent}}
 
       {{#ionList}}
-        {{#if less.extra}}
-        {{#ionItem iconLeft=false class="loadPast" action=less}}
+        {{#if less}}
+        {{#ionItem iconLeft=false class="loadPast" start=less}}
           <button class="button button-clear button-block">Laad eerdere wedstrijden</button>
         {{/ionItem}}
         {{/if}}
@@ -29,8 +29,8 @@
             {{> _competitionItem competition=this}}
           {{/if}}
         {{/each}}
-        {{#if more.extra}}
-        {{#ionItem iconLeft=false class="loadFuture" action=more}}
+        {{#if more}}
+        {{#ionItem iconLeft=false class="loadFuture" end=more}}
           <button class="button button-clear button-block">Laad volgende wedstrijden</button>
         {{/ionItem}}
         {{/if}}
