@@ -1,19 +1,11 @@
 Template.CompetitionsShow.helpers({
-  "subscribeWillOpen": function(){
-    var time = Chronos.currentTime();
-    return new Date(this.settings.opens) > time;
+  showButton: showButton,
+  noButtonReason: function(){
+    if(!this.subscribeStatus().isOpen)
+      return this.subscribeText();
+    if(this.distances(Settings.get("relationid")).length == 0)
+      return "Geen beschikbare afstanden";
   },
-  "subscribeIsOpen": function(){
-    var time = Chronos.currentTime();
-    return new Date(this.settings.opens) < time && new Date(this.settings.closes) > time;
-  },
-  "subscribeClosed": function(){
-    var time = Chronos.currentTime();
-    return new Date(this.settings.closes) < time;
-  }
-});
-
-Template.CompetitionsShow.helpers({
   subscribeUrl: function(){
     if(Settings.get("relationid"))
       var a = "https://inschrijven.schaatsen.nl/#/wedstrijd/<id>/inschrijven/licentiehouder/<rela>"
@@ -22,7 +14,10 @@ Template.CompetitionsShow.helpers({
     else
       var a = "https://inschrijven.schaatsen.nl/#/wedstrijd/<id>/inschrijven/kies-licentie"
         .replace("<id>", this.externalId);
-        console.log("url", a);
         return a;
-  }
+  },
+  viewUrl: function(){
+    return "https://inschrijven.schaatsen.nl/#/wedstrijd/<id>/informatie".replace("<id>", this.externalId);
+  },
+  distanceText: distanceText
 });

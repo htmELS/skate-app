@@ -15,30 +15,42 @@
   {{/contentFor}}
 
   {{#contentFor "headerTitle"}}
-    <h1 class="title">Competition {{name}}</h1>
+    <h1 class="title">Wedstrijd</h1>
   {{/contentFor}}
 
   {{#ionView}}
     {{#ionContent}}
 
-      {{#ionList}}
-        {{#ionItem iconRight=false}}<h2>{{name}}</h2>{{/ionItem}}
-        {{#ionItem iconRight=false}}<h2>Van {{date starts}} {{time starts}} tot {{onlytime ends starts}}</h2>{{/ionItem}}
+      {{#ionList class="competition-contents"}}
+        {{#ionItem iconRight=false}}
+          <h2>{{name}}</h2>
+          <p>Van {{date starts}} {{time starts}} tot {{onlytime ends starts}}</p>
+        {{/ionItem}}
+        {{#ionItem iconRight=false}}<p>Locatie: {{venue.name}}, {{venue.address.city}}, {{venue.address.stateOrProvince}}</p>{{/ionItem}}
 
         {{#if extra}}
-          {{#ionItem iconRight=false}}<p>{{extra}}</p>{{/ionItem}}
+          {{#ionItem iconRight=false}}<p>Opmerkingen:</p><p>{{extra}}</p>{{/ionItem}}
         {{/if}}
 
-        {{#ionItem iconRight=false class="bar-dark"}}
-          {{#if subscribeIsOpen}}
-            <h2 class="title">Inschrijven, inschrijving sluit op {{date settings.closes}} {{time settings.closes}}</h2>
+        {{#ionItem iconRight=false}}
+          <h2><span class="inline-icon">{{> ionIcon icon="speedometer" }}</span> {{distanceText}}</h2>
+
+          <h2 class="title"><span class="inline-icon">{{> ionIcon icon="edit" }}</span>
+          {{#if subscribeStatus.isOpen}}
+            Inschrijven, inschrijving sluit op {{date settings.closes}} {{time settings.closes}}
+          {{/if}}
+          {{#if subscribeStatus.willOpen}}
+            Inschrijving is open van {{date settings.opens}} tot {{onlytime settings.closes settings.opens}}
+          {{/if}}
+          {{#if subscribeStatus.isClosed}}
+            Inschrijving gesloten
+          {{/if}}
+          </h2>
+
+          {{#if showButton}}
             <a class="button button-positive button-block" href="{{subscribeUrl}}">Open inschrijvingsformulier</a>
-          {{/if}}
-          {{#if subscribeWillOpen}}
-            <h2 class="title">Inschrijving is open van {{date settings.opens}} tot {{onlytime settings.closes settings.opens}}</h2>
-          {{/if}}
-          {{#if subscribeClosed}}
-            <h2 class="title">Inschrijving gesloten</h2>
+          {{else}}
+            <a class="button button-block" href="{{viewUrl}}">Bekijk online</a>  
           {{/if}}
         {{/ionItem}}
       {{/ionList}}

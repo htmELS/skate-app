@@ -2,10 +2,10 @@
 @import '.meteor/local/build/programs/server/assets/packages/meteoric_ionic-sass/_ionic';
 @import '.meteor/local/build/programs/server/assets/packages/meteoric_ionicons-sass/_ionicons';
 
-* {
+/** {
   transition: all 1s;
 }
-
+*/
 .people-count {
   font-size: 12px;
   width: 36px;
@@ -39,3 +39,15 @@
     display: inline;
   }
 }
+
+.color-pick {
+  display: inline-block;
+  margin-right: 1em;
+  border: 1px solid;
+  width: 75px;
+  height: 75px;
+}
+.color-gray { background: #f8f8f8; border-color: #b2b2b2; }
+.color-green { background: #ceff25; border-color: #000000; }
+.color-red { background: #B52722; border-color: #672B29; }
+.color-blue { background: #387ef5; border-color: #0c60ee; }

@@ -10,16 +10,30 @@
   {{/contentFor}}
 
   {{#contentFor "headerTitle"}}
-    <h1 class="title">Competitions</h1>
+    <h1 class="title">{{title}}</h1>
   {{/contentFor}}
 
   {{#ionView}}
     {{#ionContent}}
 
       {{#ionList}}
+        {{#if less.extra}}
+        {{#ionItem iconLeft=false class="loadPast"}}
+          <button class="button button-clear button-block">Laad eerdere wedstrijden</button>
+        {{/ionItem}}
+        {{/if}}
         {{#each competitions}}
-          {{> _competitionItem competition=this}}
+          {{#if this.text}}
+            <div class="item item-divider {{class}}">{{text}}</div>
+          {{else}}
+            {{> _competitionItem competition=this}}
+          {{/if}}
         {{/each}}
+        {{#if more.extra}}
+        {{#ionItem iconLeft=false class="loadFuture"}}
+          <button class="button button-clear button-block">Laad volgende wedstrijden</button>
+        {{/ionItem}}
+        {{/if}}
       {{/ionList}}
 
     {{/ionContent}}
@@ -28,15 +42,15 @@
 
 <template name="_competitionItem">
   {{#with competition}}
-    {{#ionItem route="competitions.show" iconLeft=true iconRight=true}}
+    {{#ionItem route="competitions.show" iconLeft=false iconRight=true buttonRight=true textWrap=true}}
       <h2>{{name}}</h2>
-      <p>
-        {{venue.address.city}}, {{datef starts}} - {{onlytime ends starts}} <span class="inline-icon">{{> ionIcon icon="ios-people" }}, {{subscribeText}}</span>
-      </p>
-<!--       <span class="people-count">
-      </span>
- -->
-      {{> ionIcon icon="ios-arrow-right" }}
+      <p>{{venue.address.city}}, {{datef starts}} - {{onlytime ends starts}}</p>
+      <p><span class="inline-icon">{{> ionIcon icon="edit" }}</span> {{subscribeText}}</p>
+      <p><span class="inline-icon">{{> ionIcon icon="speedometer" }}</span> {{distanceText}}</p>
+      {{#if showButton}}
+        <p><button class="button button-positive button-small button-block">Inschrijven</button></p>
+      {{/if}}       
+      {{> ionIcon icon="ios-arrow-right" }} 
     {{/ionItem}}
   {{/with}}
 </template>

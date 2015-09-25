@@ -13,24 +13,39 @@
 
       <form id="edit-form" novalidate="novalidate">
         <label type="stacked" class="item item-input item-stacked-label">
-          <span class="input-label">KNSB Relatie Id</span>
+          <span class="input-label">KNSB Relatienummer</span>
           <input type="text" label-type="stacked" name="relationId" required="" id="relationId" data-schema-key="relationId" maxlength="200" value="{{relationId}}">
         </label>
         <label type="stacked" class="item item-input item-stacked-label">
+          <span class="input-label">Lievelingskleur</span>
+          <input type="text" label-type="stacked" name="color" required="" id="color" data-schema-key="color" maxlength="200" value="{{color}}">
+          <div class="color-pick color-gray"></div>
+          <div class="color-pick color-green"></div>
+          <div class="color-pick color-red"></div>
+          <div class="color-pick color-blue"></div>
+        </label>
+
+        <div class="padding">
+          <button type="submit" class="button button-positive button-block">
+              Save          
+          </button>
+        </div>
+
+        <label type="stacked" class="item item-input item-stacked-label">
           <span class="input-label">Naam</span>
-          <input type="text" label-type="stacked" name="name" required="" id="name" data-schema-key="name" maxlength="200" value="{{profile.name}}">
+          <input type="text" label-type="stacked" name="name" required="" id="name" data-schema-key="name" maxlength="200" value="{{profile.personName.firstName}} {{profile.personName.surnamePrefix}} {{profile.personName.surname}}" disabled>
         </label>
         <label type="stacked" class="item item-input item-stacked-label">
           <span class="input-label">Categorie</span>
-          <input type="text" label-type="stacked" name="category" required="" id="category" data-schema-key="category" maxlength="200" value="{{profile.category}}">
+          <input type="text" label-type="stacked" name="category" required="" id="category" data-schema-key="category" maxlength="200" value="{{profile.category}}" disabled>
         </label>
         <label type="stacked" class="item item-input item-stacked-label">
           <span class="input-label">Geboortedatum</span>
-          <input type="text" label-type="stacked" name="personBirthDate" required="" id="personBirthDate" data-schema-key="personBirthDate" maxlength="200" value="{{profile.personBirthDate}}">
+          <input type="text" label-type="stacked" name="personBirthDate" required="" id="personBirthDate" data-schema-key="personBirthDate" maxlength="200" value="{{date profile.personBirthDate}}" disabled>
         </label>
         <label type="stacked" class="item item-input item-stacked-label">
           <span class="input-label">Club</span>
-          <input type="text" label-type="stacked" name="club" required="" id="club" data-schema-key="club" maxlength="200" value="{{profile.club.fullName}}">
+          <input type="text" label-type="stacked" name="club" required="" id="club" data-schema-key="club" maxlength="200" value="{{profile.club.fullName}}" disabled>
         </label>
 <!--         <label type="stacked" class="item item-input item-stacked-label">
           <span class="input-label">Body</span>
@@ -45,11 +60,6 @@
           </label>
         </div>      
  -->
-        <div class="padding">
-          <button type="submit" class="button button-positive button-block">
-              Save          
-          </button>
-        </div>
       </form>
 
     {{/ionContent}}
