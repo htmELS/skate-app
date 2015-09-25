@@ -11,10 +11,14 @@ Template.CompetitionsList.helpers({
 
 Template.CompetitionsList.events({
   "click .loadPast": function(){
-    this.less.conti();
+    IonLoading.show();
+    this.action.conti();
+    setTimeout(IonLoading.hide, 500);
   },
   "click .loadFuture": function(){
-    this.more.conti();
+    IonLoading.show();
+    this.action.conti();
+    setTimeout(IonLoading.hide, 500);
   }
 })
 
@@ -68,7 +72,7 @@ Template.registerHelper("onlytime", (date, start) => {
 
 Template.CompetitionsList.created = function () {
   this.autorun(function () {
-    this.subscription = Meteor.subscribe('competitions');
+    // this.subscription = Meteor.subscribe('competitions');
   }.bind(this));
 };
 

@@ -7,16 +7,19 @@ Competition = class Competition {
   }
 
   distances(relationId) {
-    var settings = DistanceSettings.findOne({ relationId: relationId, competitionId: this.externalId });
-    if(!settings || settings.lastSyncTimestamp < 1000 * 3600){
+    var maxAge = new Date(new Date().getTime() - 1000 * 3600);
+    var settings = DistanceSettings.findOne({ relationId: relationId, competitionId: this.externalId, lastSyncTimestamp: { $gte: maxAge }}, { fields: { combinations: 1 } });
+    if(!settings){
+      console.log("Calling!");
       Meteor.call("distanceSettings", this.externalId, relationId);
     }
-    var possible = DistanceCombinations.findOne({ competitionId: this.externalId });
-    if(!possible || possible.lastSyncTimestamp < 1000 * 3600){
+    var possible = DistanceCombinations.findOne({ competitionId: this.externalId, lastSyncTimestamp: { $gte: maxAge } }, { fields: { combinations: 1 } });
+    if(!possible){
+      console.log("Calling!");
       Meteor.call("distanceCombinations", this.externalId);
     }
 
-    if (settings && possible && settings.combinations) {
+    if (settings && possible && settings.combinations && settings.combinations.distanceCombinations) {
       // All available settings for this user
       var existing = settings.combinations.distanceCombinations.map(c => ({ "id": c.distanceCombinationId, "max": c.allowedRegistrations }));
       // Filter combinations by settings

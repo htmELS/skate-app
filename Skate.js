@@ -25,10 +25,7 @@ Router.route('/', function(){
     var fEnd   = Session.get("competitions.filter.end") || { "starts": { "$lte": new Date(new Date().getTime() + 1000 * 3600 * 24 * 60) } };
     var filters = [ filter, fBegin, fEnd ];
 
-    var competitions = Competitions.find(_.extend(filter, fBegin, fEnd), { sort: {starts: 1} }).fetch();
-
-    var first = competitions[0].ends;
-    var last = competitions[competitions.length-1].starts;
+    var competitions = Competitions.find(_.extend({}, filter, fBegin, fEnd), { sort: {starts: 1} }).fetch();
 
     return {
       // Data
@@ -51,7 +48,7 @@ Router.route('/', function(){
       }, []),
       // Continuation forward
       "more": function(){
-        var any = Competitions.find(_.extend(filter, fBegin), { sort: {starts: 1}, limit: 20 + competitions.length }).fetch().map(c => c.starts)
+        var any = Competitions.find(_.extend({}, filter, fBegin), { sort: {starts: 1}, limit: 20 + competitions.length }).fetch().map(c => c.starts)
         return {
           extra: any.length - competitions.length,
           conti: function(){
@@ -60,7 +57,7 @@ Router.route('/', function(){
       },
       // Continuation backward
       "less": function(){
-        var any = Competitions.find(_.extend(filter, fEnd), { sort: {starts: -1}, limit: 20 + competitions.length }).fetch().map(c => c.ends)
+        var any = Competitions.find(_.extend({}, filter, fEnd), { sort: {starts: -1}, limit: 20 + competitions.length }).fetch().map(c => c.ends)
         return {
           extra: any.length - competitions.length, 
           conti: function(){
