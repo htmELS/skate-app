@@ -1,15 +1,16 @@
-# Skating applications
+# Skating application
 
 Features:
 
 - [ ] Wedstrijden
-	- [ ] Tonen wedstrijden per stad
+	- [x] Tonen wedstrijden per stad
+	- [x] Direct-link naar inschrijving
 	- [ ] Inschrijven vanuit de app
 	- [ ] Reminders + notificaties bij open gaan inschrijving
 	- [ ] Kunnen zien wie nog meer gaat van je FB vrienden (of notificatie gezet heeft)
 	- [ ] Uitslagen kunnen zien
 - [ ] PR ranglijsten van je FB vrienden
-- [ ] Instellingen
+- [x] Instellingen
 	- [x] Koppelen van KNSB nummer
 	- [x] Instellen lievelingskleur
 - [ ] Skeeleren / schaatsen tracker
