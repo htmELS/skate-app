@@ -74,6 +74,8 @@ if (Meteor.isServer) {
 if(Meteor.isServer) {
   Meteor.methods({
     userProfile: function (relationId) {
+      if(!relationId)
+        return;
       var exists = Licenses.findOne({ key: relationId });
       if(!exists)
       HTTP.get("https://inschrijven.schaatsen.nl/api/licenses/KNSB/SpeedSkating.LongTrack/"+relationId,{},function(err,resp){
